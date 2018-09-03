@@ -8,37 +8,38 @@ This is a specification of the JSON format generic for all graphs.
 |---|---|---|
 | id | string | Unique identifier of the graph. |
 | title | string | Graph title. |
-| type | string | Graph type. See the possible options [here](#v1_0_graphTypes). |
-| axes | [Axes](#v1_0_axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `x` and one of the `y` axes. |
-| series | Array&lt;[Series](#v1_0_series)&gt; | A list of objects to be drawn on the graph. Series type and data structure depends on a graph type. |
+| type | string | Graph type. See the possible options [here](#graphTypes). |
+| axes | [Axes](#axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `x` and one of the `y` axes. |
+| series | Array&lt;[Series](#series)&gt; | A list of objects to be drawn on the graph. Series type and data structure depends on a graph type. |
 
-#### Graph types <a name="v1_0_graphTypes"></a>
+#### Graph types <a name="graphTypes"></a>
 
 | Type | Description |
 |---|---|
 | [category](./categoryGraphJsonFormat.md) | A graph with categories on `x` axis. These graphs can contain bars and lines. |
 
-#### Axes <a name="v1_0_axes"></a>
+#### Axes <a name="axes"></a>
 
 | Property | Type | Description |
 |---|---|---|
-| yLeft | [Axis](#v1_0_axis) | `y` axis shown on the left side of the graph. Note that at least one of the `y` axes should be specified. |
-| yRight | [Axis](#v1_0_axis) | `y` axis shown on the right side of the graph. Note that at least one of the `y` axes should be specified. |
-| xBottom | [Axis](#v1_0_axis) | `x` axis shown on the bottom of the graph. Note that at least one of the `x` axes should be specified. |
-| xTop | [Axis](#v1_0_axis) | `x` axis shown on the top of the graph. Note that at least one of the `x` axes should be specified. |
+| yLeft | [Axis](#axis) | `y` axis shown on the left side of the graph. Note that at least one of the `y` axes should be specified. |
+| yRight | [Axis](#axis) | `y` axis shown on the right side of the graph. Note that at least one of the `y` axes should be specified. |
+| xBottom | [Axis](#axis) | `x` axis shown on the bottom of the graph. Note that at least one of the `x` axes should be specified. |
+| xTop | [Axis](#axis) | `x` axis shown on the top of the graph. Note that at least one of the `x` axes should be specified. |
 
 **Note** that each axis property name is axis id that is referenced from within data points, i.e. `"yLeft"` is the id of left `y` axis.
 
-#### Axis <a name="v1_0_axis"></a>
+#### Axis <a name="axis"></a>
 
 | Property | Type | Description |
 |---|---|---|
 | title | string | **Optional**. Axis title. |
 | scale | Array&lt;number&gt; | **Optional**. Axis scale as an array of two elements where the first element is the axis start value and the second one is it's end. E.g. `[0, 100]` scale will result in a axis with values in the range between 0 and 100. If this property is not set then scale will be selected automatically depending on graph type and series data points. |
+| formatSpecifier |	string | Ticks and tooltips numeric values formatting. Refer [d3-format](https://github.com/d3/d3-format#locale_format). |
 | units | string | **Optional**. Axis units. If set then units will be displayed on the axis and together with data point value. |
 | ticks | number or Array&lt;number&gt; | **Optional**. If a number then determines how many ticks will be displayed on the axis. If an array then specifies the exact ticks that should be shown, e.g. `[0, 56, 89, 100]` will display 4 ticks on the axis: 0, 56, 89 and 100.  |
 
-#### Series <a name="v1_0_series"></a>
+#### Series <a name="series"></a>
 
 | Property | Type | Description |
 |---|---|---|

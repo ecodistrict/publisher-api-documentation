@@ -11,38 +11,39 @@ The format is a specialization of the [graph](./graphJsonFormat.md) format.
 | id | string | Unique identifier of the graph. |
 | title | string | Graph title. |
 | type | string | Graph type. For category graph the value is always `"category"` |
-| axes | [Axes](#v1_0_axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `y` axes. |
-| categories | Array&lt;[Category](#v1_0_category)&gt; | Describes the graph categories. These categories will be shown on `x` axes. Each data point belongs to one of the categories. Consider category as an `x` coordinate of a data point. `categories` field is only relevant for the category graphs.  |
-| series | Array&lt;[Series](#v1_0_series)&gt; | A list of objects to be drawn on the graph. Depending on it's type every single series can represent a single line or a set of bars. If a series represents bars then each data point of the series is a bar. All bars within a single series are semantically united and have the same color and a common entry in the legend. Any number of series with any number of data points is allowed. |
+| axes | [Axes](#axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `y` axes. |
+| categories | Array&lt;[Category](#category)&gt; | Describes the graph categories. These categories will be shown on `x` axes. Each data point belongs to one of the categories. Consider category as an `x` coordinate of a data point. `categories` field is only relevant for the category graphs.  |
+| series | Array&lt;[Series](#series)&gt; | A list of objects to be drawn on the graph. Depending on it's type every single series can represent a single line or a set of bars. If a series represents bars then each data point of the series is a bar. All bars within a single series are semantically united and have the same color and a common entry in the legend. Any number of series with any number of data points is allowed. |
 
-#### Axes <a name="v1_0_axes"></a>
+#### Axes <a name="axes"></a>
 
 | Property | Type | Description |
 |---|---|---|
-| yLeft | [Axis](#v_1_0_axis) | `y` axis shown on the left side of the graph. Note that at least one of the `y` axes should be specified. |
-| yRight | [Axis](#v_1_0_axis) | `y` axis shown on the right side of the graph. Note that at least one of the `y` axes should be specified. |
-| xBottom | [Axis](#v_1_0_axis) | `x` axis shown on the bottom of the graph. This axis will display `categories`. Note that this field is limited comparing to other axes and has only one significant property `title`. Other [Axis](#v1_0_axis) properties will have no affect on the `xBottom` axis. Graph `categories` will be used as a source for the ticks of the `xBottom` axis. |
-| xTop | [Axis](#v_1_0_axis) | **Not supported**. |
+| yLeft | [Axis](#axis) | `y` axis shown on the left side of the graph. Note that at least one of the `y` axes should be specified. |
+| yRight | [Axis](#axis) | `y` axis shown on the right side of the graph. Note that at least one of the `y` axes should be specified. |
+| xBottom | [Axis](#axis) | `x` axis shown on the bottom of the graph. This axis will display `categories`. Note that this field is limited comparing to other axes and has only one significant property `title`. Other [Axis](#axis) properties will have no affect on the `xBottom` axis. Graph `categories` will be used as a source for the ticks of the `xBottom` axis. |
+| xTop | [Axis](#axis) | **Not supported**. |
 
 **Note** that each axis property name is axis id that is referenced from within data points.
 
-#### Axis <a name="v1_0_axis"></a>
+#### Axis <a name="axis"></a>
 
 | Property | Type | Description |
 |---|---|---|
 | title | string | **Optional**. Axis title. |
 | scale | Array&lt;number&gt; | **Optional**. Axis scale as an array of two elements where the first element is the axis start value and the second one is it's end. E.g. `[0, 100]` scale will result in a axis with values in the range between 0 and 100. If this property is not set then scale will be selected automatically depending on `y` values of the data points bind to the axis. |
+| formatSpecifier |	string | Ticks and tooltips numeric values formatting. Refer [d3-format](https://github.com/d3/d3-format#locale_format). |
 | units | string | **Optional**. Axis units. If set then units will be displayed on the axis and together with data point value. |
 | ticks | number or Array&lt;number&gt; | **Optional**. If a number then determines how many ticks will be displayed on the axis. If an array then specifies the exact ticks that should be shown, e.g. `[0, 56, 89, 100]` will display 4 ticks on the axis: 0, 56, 89 and 100.  |
 
-#### Category <a name="v1_0_category"></a>
+#### Category <a name="category"></a>
 
 | Property | Type | Description |
 |---|---|---|
 | id | string | Category id. The category id is referred form within data points via `categoryId` property. Data point belongs to a category referred in the `categoryId` property. |
 | title | string | Category title that will be displayed under space allocated for the category on the `x` axis. |
 
-#### Series <a name="v1_0_series"></a>
+#### Series <a name="series"></a>
 
 | Property | Type | Description |
 |---|---|---|
@@ -50,9 +51,9 @@ The format is a specialization of the [graph](./graphJsonFormat.md) format.
 | type | `"bar"` or `"line"` | Currently category graph supports only two series types: bars and lines. |
 | color | string | **Optional**. If defined all bars within the series or a line defined be the series will have the specified color. If not defined then color will be assigned automatically. |
 | title | string | Series title. Will be displayed in the legend as well as in tooltip when bar or line is hovered. |
-| data | Array&lt;[DataPoint](#v1_0_dataPoint)&gt; | If series type is `"bar"` each data point defines a single bar. If series type is `"line"` then each data point defines a point on a line graph.  |
+| data | Array&lt;[DataPoint](#dataPoint)&gt; | If series type is `"bar"` each data point defines a single bar. If series type is `"line"` then each data point defines a point on a line graph.  |
 
-#### DataPoint <a name="v1_0_dataPoint"></a>
+#### DataPoint <a name="dataPoint"></a>
 
 | Property | Type | Description |
 |---|---|---|
@@ -60,7 +61,7 @@ The format is a specialization of the [graph](./graphJsonFormat.md) format.
 | y | string | Bar height or line point `y` coordinate. Note that *y* can have a negative value. When represented on a graph the axis is taken into account and the *y* value is scaled correspondingly. |
 | axisId | string | Axis id. Refers to an axis to which the *y* property is bind to. |
 
-#### Examples <a name="v1_0_examples"></a>
+#### Examples <a name="examples"></a>
 
 #### Series array usage examples
 
