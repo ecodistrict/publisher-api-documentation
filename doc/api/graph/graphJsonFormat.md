@@ -11,6 +11,7 @@ This is a specification of the JSON format generic for all graphs.
 | type | string | Graph type. See the possible options [here](#graphTypes). |
 | axes | [Axes](#axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `x` and one of the `y` axes. |
 | series | Array&lt;[Series](#series)&gt; | A list of objects to be drawn on the graph. Series type and data structure depends on a graph type. |
+| clickable | `"labels"` or `undefined` | Indicates what regions of graph are clickable. This means that if client clicks on the region then a corresponding message must be sent to a backend server so that backend can react on this. **Note** that this field is temporary and will be replaced with a different one in the future. |
 
 #### Graph types <a name="graphTypes"></a>
 
