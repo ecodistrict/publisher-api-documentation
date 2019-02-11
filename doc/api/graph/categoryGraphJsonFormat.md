@@ -9,6 +9,7 @@ The format is a specialization of the [graph](./graphJsonFormat.md) format.
 | Property | Type | Description |
 |---|---|---|
 | id | string | Unique identifier of the graph. |
+| apiVersion | string | Vesion of the graph format. Current version is `graph/1.0` |
 | title | string | Graph title. |
 | type | string | Graph type. For category graph the value is always `"category"` |
 | axes | [Axes](#axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `y` axes. |
