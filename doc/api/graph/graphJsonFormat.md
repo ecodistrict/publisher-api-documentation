@@ -7,6 +7,7 @@ This is a specification of the JSON format generic for all graphs.
 | Property | Type | Description |
 |---|---|---|
 | id | string | Unique identifier of the graph. |
+| apiVersion | string | Vesion of the graph format. Current version is `graph/1.0` |
 | title | string | Graph title. |
 | type | string | Graph type. See the possible options [here](#graphTypes). |
 | axes | [Axes](#axes) | Describes what axes are used and what are their properties and settings. Each axis can have a flexible configuration, e.g. axis scale, ticks and units. Every data point is bind to one of the `x` and one of the `y` axes. |
